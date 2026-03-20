@@ -7,20 +7,18 @@ public class Analizador {
         List<String> tokens = new ArrayList<>();
         StringBuilder acumulador = new StringBuilder();
 
-        // Eliminamos espacios en blanco por seguridad
         expresion = expresion.replace(" ", "");
 
         for (int i = 0; i < expresion.length(); i++) {
             char c = expresion.charAt(i);
 
-            // Validar si es una letra (variable) o un dígito (número)
+            // Validar si es una letra o un numero
             if (Character.isLetterOrDigit(c)) {
                 acumulador.append(c);
             } else {
-                // Si hay algo acumulado (un número o variable completa), lo guardamos
                 if (acumulador.length() > 0) {
                     tokens.add(acumulador.toString());
-                    acumulador.setLength(0); // Limpiamos el acumulador
+                    acumulador.setLength(0);
                 }
 
                 // Validamos que el caracter sea un operador permitido o paréntesis

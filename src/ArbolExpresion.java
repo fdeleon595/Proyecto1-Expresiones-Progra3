@@ -18,7 +18,7 @@ public class ArbolExpresion {
             } else {
                 // Si es un operador, sacamos dos nodos para que sean sus hijos
                 Nodo nodoOperador = new Nodo(token);
-                // ¡Importante! El primero que sale de la pila es el hijo DERECHO
+                
                 nodoOperador.derecho = pilaNodos.pop();
                 nodoOperador.izquierdo = pilaNodos.pop();
                 
@@ -26,10 +26,9 @@ public class ArbolExpresion {
                 pilaNodos.push(nodoOperador);
             }
         }
-        // El último nodo que queda en la pila es la raíz de todo el árbol
         this.raiz = pilaNodos.pop();
     }
- // Recorrido Preorden: Raíz -> Izquierdo -> Derecho
+ // Recorrido Preorden
     public void preorden(Nodo nodo) {
         if (nodo != null) {
             System.out.print(nodo.valor + " ");
@@ -38,7 +37,7 @@ public class ArbolExpresion {
         }
     }
 
-    // Recorrido Inorden: Izquierdo -> Raíz -> Derecho
+    // Recorrido Inorden
     public void inorden(Nodo nodo) {
         if (nodo != null) {
             inorden(nodo.izquierdo);
@@ -47,7 +46,7 @@ public class ArbolExpresion {
         }
     }
 
-    // Recorrido Postorden: Izquierdo -> Derecho -> Raíz
+    // Recorrido Postorden
     public void postorden(Nodo nodo) {
         if (nodo != null) {
             postorden(nodo.izquierdo);
@@ -74,7 +73,7 @@ public class ArbolExpresion {
                     case "*": resultado = valorIzquierdo * valorDerecho; break;
                     case "/": resultado = valorIzquierdo / valorDerecho; break;
                     case "^": resultado = Math.pow(valorIzquierdo, valorDerecho); break;
-                    // Para la raíz, podrías usar un formato específico, ej. valorIzquierdo √ valorDerecho
+                    
                 }
                 pilaEvaluacion.push(resultado);
             }

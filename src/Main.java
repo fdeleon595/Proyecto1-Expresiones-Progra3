@@ -8,15 +8,15 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
-        // 1. Ingresar la expresión matemática (simulando la caja de texto)
+        // Ingresar la expresión matemática
         System.out.println("Ingrese la expresión matemática:");
         String expresion = scanner.nextLine();
         
-        // 2. Tokenizar la expresión (separar números, letras y operadores)
+        // Organizar la expresión 
         Analizador analizador = new Analizador();
         List<String> tokens = analizador.tokenizar(expresion);
         
-        // 3. Detectar variables y pedir valores al usuario
+        // Detectar variables y pedir valores al usuario
         Map<String, String> valoresVariables = new HashMap<>();
         for (String token : tokens) {
             // Si el token es una letra, es una variable
@@ -29,7 +29,7 @@ public class Main {
             }
         }
         
-        // 4. Crear una lista paralela reemplazando las letras por los números ingresados
+        // Crear una lista paralela reemplazando las letras por los números ingresados
         List<String> tokensNumericos = new ArrayList<>();
         for (String token : tokens) {
             if (valoresVariables.containsKey(token)) {
@@ -39,18 +39,16 @@ public class Main {
             }
         }
 
-        // 5. Convertir a Notación Postfija
+        // Convertir a Notación Postfija
         ConversorPostfija conversor = new ConversorPostfija();
-        // Postfija original (con letras) para dibujar el árbol
         List<String> postfija = conversor.convertir(tokens); 
-        // Postfija numérica para calcular el resultado final
         List<String> postfijaNumerica = conversor.convertir(tokensNumericos); 
         
-        // 6. Construir el árbol de expresión
+        // Construir el árbol de expresión
         ArbolExpresion arbol = new ArbolExpresion();
         arbol.construirArbol(postfija); 
         
-        // 7. Mostrar los recorridos requeridos
+        // Mostrar los recorridos requeridos
         System.out.println("\n--- Resultados ---");
         System.out.print("1. Recorrido Preorden: "); 
         arbol.preorden(arbol.raiz); 
@@ -64,11 +62,11 @@ public class Main {
         arbol.postorden(arbol.raiz); 
         System.out.println();
         
-        // 8. Evaluar la expresión y mostrar el resultado
+        // Evaluar la expresión y mostrar el resultado
         double resultado = arbol.evaluarPostfija(postfijaNumerica);
         System.out.println("\nResultado de la evaluación: " + resultado);
         
-     // --- Interfaz Gráfica ---
+     // Interfaz Gráfica
         // Crear la ventana principal
         javax.swing.JFrame ventana = new javax.swing.JFrame("Árbol de Expresión - Proyecto 1");
         ventana.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
@@ -78,7 +76,6 @@ public class Main {
         LienzoArbol lienzo = new LienzoArbol(arbol);
         ventana.add(lienzo);
         
-        // Centrar la ventana en la pantalla y hacerla visible
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
         
